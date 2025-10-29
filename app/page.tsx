@@ -127,7 +127,7 @@ export default function Page() {
           viewOptions={{ amount: 0.3 }}
           transition={{ duration: 0.3, ease: 'easeInOut' }}
         >
-          <h2 className="text-2xl font-semibold mb-6 text-black dark:text-white">Sobre mí</h2>
+          <h2 className="text-2xl font-semibold mb-6 text-black dark:text-white">About me</h2>
         </InView>
         <InView
           variants={{

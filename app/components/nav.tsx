@@ -9,8 +9,9 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = {
   "/": { name: "About me" },
-  "/experience": { name: "Experience" },
+  "/experience": { name: "Resume" },
   "/blog": { name: "Blog" },
+  "/gallery": { name: "Gallery" },
   // "/photos": { name: "Photos" },
   "/contact": { name: "Contact" },
 };
@@ -77,8 +78,8 @@ export function Navbar() {
           transition: isScrolled ? 'none' : 'all 0.3s ease'
         }}
       >
-        <div className="max-w-[624px] mx-auto px-6 sm:px-4 md:px-0">
-          <div className="flex items-center justify-between py-8">
+        <div className="max-w-[624px] mx-auto px-6 sm:px-4 md:px-6">
+          <div className="flex items-center justify-between py-6">
             <Link href="/" className="text-2xl font-semibold leading-none">
               {metaData.title}
             </Link>
@@ -89,7 +90,7 @@ export function Navbar() {
                 <Link
                   key={path}
                   href={path}
-                  className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative"
+                  className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative whitespace-nowrap"
                 >
                   {name}
                 </Link>

@@ -171,3 +171,8 @@ table {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Gallery route footer spacing override */
+.gallery-route main > small {
+  margin-top: 0 !important;
+}

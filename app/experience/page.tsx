@@ -28,7 +28,7 @@ export default function Projects() {
         viewOptions={{ amount: 0.3 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <h1 className="mb-8 text-3xl font-bold text-center text-black dark:text-white">Portfolio & Experience</h1>
+        <h1 className="mb-6 text-3xl font-bold text-center text-black dark:text-white">Resume</h1>
       </InView>
       
       {/* Navigation Buttons */}
@@ -52,7 +52,7 @@ export default function Projects() {
         </button>
         <button
           onClick={() => scrollToSection('personal-projects')}
-          className="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
+          className="inline-flex items-center px-3 py-1.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
         >
           <svg className="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -61,7 +61,7 @@ export default function Projects() {
         </button>
         <button
           onClick={() => scrollToSection('education')}
-          className="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
+          className="inline-flex items-center px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
         >
           <svg className="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -97,7 +97,9 @@ export default function Projects() {
               viewOptions={{ amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }}
             >
-              <article className="group bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              {/* Colored accent bar */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>
               {/* Contenido de la tarjeta */}
               <div className="p-6 flex flex-col justify-between">
                 <div>
@@ -105,7 +107,7 @@ export default function Projects() {
                     <h2 className="text-xl font-semibold text-black dark:text-white">
                       {project.title}
                     </h2>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded border border-blue-200 dark:border-blue-800 whitespace-nowrap">
                       {project.year}
                     </span>
                   </div>
@@ -124,50 +126,9 @@ export default function Projects() {
                     </div>
                   )}
                   
-                  <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                    {project.description.split('\n\n').map((section, sectionIndex) => {
-                      const lines = section.split('\n');
-                      const isRoleHeader = lines[0].includes('(') && lines[0].includes(')');
-                      
-                      if (isRoleHeader) {
-                        const roleInfo = lines[0];
-                        const bulletPoints = lines.slice(1);
-                        
-                        return (
-                          <div key={sectionIndex} className="mb-4 last:mb-0">
-                            {/* Role Header with Timeline */}
-                            <div className="flex items-center mb-2">
-                              {/* <div className="w-3 h-3 bg-blue-500 rounded-full mr-3 flex-shrink-0"></div> */}
-                              <div className="flex-1">
-                                <h3 className="font-semibold text-blue-600 dark:text-blue-400">
-                                  {roleInfo.split(' (')[0]}
-                                </h3>
-                                <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                                  {roleInfo.match(/\((.*?)\)/)?.[1]}
-                                </p>
-                              </div>
-                            </div>
-                            
-                            {/* Bullet Points */}
-                            <div className="bulletPoints">
-                              {bulletPoints.map((point, pointIndex) => (
-                                <p key={pointIndex} className="mb-1 pl-2 border-neutral-200 dark:border-neutral-700">
-                                  {point}
-                                </p>
-                              ))}
-                            </div>
-                          </div>
-                        );
-                      } else {
-                        // Regular paragraph (fallback)
-                        return (
-                          <p key={sectionIndex} className="mb-1">
-                            {section}
-                          </p>
-                        );
-                      }
-                    })}
-                  </div>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                    {project.description}
+                  </p>
                   
                   {/* Tags */}
                   {project.tags && (
@@ -189,28 +150,76 @@ export default function Projects() {
                   )}
                 </div>
                 
-                {/* Enlace a la empresa */}
-                <Link
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <span>Visit Company</span>
-                  <svg
-                    className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                {/* Enlaces */}
+                <div className="flex items-center gap-4 flex-wrap">
+                  <Link
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </Link>
+                    <span>Visit Company</span>
+                    <svg
+                      className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </Link>
+                  {"workUrl" in project && project.workUrl && (
+                    <Link
+                      href={project.workUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
+                      <span>View Work</span>
+                      <svg
+                        className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </Link>
+                  )}
+                  {"thesisUrl" in project && project.thesisUrl && (
+                    <Link
+                      href={project.thesisUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    >
+                      <span>View Thesis</span>
+                      <svg
+                        className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                        />
+                      </svg>
+                    </Link>
+                  )}
+                </div>
               </div>
             </article>
             </InView>
@@ -243,52 +252,36 @@ export default function Projects() {
               viewOptions={{ amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }}
             >
-              <article className="group bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700 flex flex-col md:flex-row">
-              {/* Imagen de portada */}
-              <div className="relative w-full md:w-64 h-48 md:h-auto overflow-hidden flex-shrink-0">
-                                 {project.image ? (
-                   <Image
-                     src={project.image}
-                     alt={project.title}
-                     fill
-                     className="object-cover transition-transform duration-300 group-hover:scale-110"
-                   />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                    <div className="text-white text-4xl font-bold opacity-50">
-                      {project.title.charAt(0)}
-                    </div>
-                  </div>
-                )}
-                {/* Overlay con año */}
-                <div className="absolute top-3 right-3 bg-black bg-opacity-70 text-white text-xs px-2 py-1 rounded">
-                  {project.year}
-                </div>
-                {/* GitHub icon overlay */}
-                <div className="absolute bottom-3 left-3 bg-black bg-opacity-70 text-white p-2 rounded">
-                  <svg
-                    className="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-              
+              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              {/* Colored accent bar */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-purple-500"></div>
               {/* Contenido de la tarjeta */}
-              <div className="p-4 flex-1 flex flex-col justify-between">
+              <div className="p-6 flex flex-col justify-between">
                 <div>
-                  <h2 className="text-xl font-semibold text-black dark:text-white mb-3 line-clamp-2">
-                    {project.title}
-                  </h2>
+                  <div className="flex justify-between items-start mb-2">
+                    <h2 className="text-xl font-semibold text-black dark:text-white">
+                      {project.title}
+                    </h2>
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-purple-50 dark:bg-purple-950/30 px-2 py-1 rounded border border-purple-200 dark:border-purple-800 whitespace-nowrap">
+                      {project.year}
+                    </span>
+                  </div>
                   
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-3 mb-4">
+                  {/* Project and Location */}
+                  {project.project && (
+                    <div className="mb-3">
+                      <p className="text-lg font-medium text-purple-600 dark:text-purple-400">
+                        {project.project}
+                        {project.location && (
+                          <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-2">
+                            | {project.location}
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                  )}
+                  
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
                     {project.description}
                   </p>
                   
@@ -312,28 +305,30 @@ export default function Projects() {
                   )}
                 </div>
                 
-                {/* Enlace a GitHub */}
-                <Link
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                >
-                  <span>View Project</span>
-                  <svg
-                    className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                {/* Enlaces */}
+                <div className="flex items-center gap-4 flex-wrap">
+                  <Link
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </Link>
+                    <span>View Project</span>
+                    <svg
+                      className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </article>
             </InView>
@@ -366,7 +361,9 @@ export default function Projects() {
               viewOptions={{ amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }}
             >
-              <article className="group bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              {/* Colored accent bar */}
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
               {/* Contenido de la tarjeta */}
               <div className="p-6 flex flex-col justify-between">
                 <div>
@@ -374,7 +371,7 @@ export default function Projects() {
                     <h2 className="text-xl font-semibold text-black dark:text-white">
                       {project.title}
                     </h2>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
+                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-green-50 dark:bg-green-950/30 px-2 py-1 rounded border border-green-200 dark:border-green-800 whitespace-nowrap">
                       {project.year}
                     </span>
                   </div>
@@ -386,20 +383,16 @@ export default function Projects() {
                         {project.university}
                         {project.location && (
                           <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-2">
-                            • {project.location}
+                            | {project.location}
                           </span>
                         )}
                       </p>
                     </div>
                   )}
                   
-                  <div className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-                    {project.description.split('\n').map((line, lineIndex) => (
-                      <p key={lineIndex} className="mb-1 pl-2 border-l-2 border-neutral-200 dark:border-neutral-700">
-                        {line}
-                      </p>
-                    ))}
-                  </div>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                    {project.description}
+                  </p>
                   
                   {/* Tags */}
                   {project.tags && (
@@ -421,28 +414,30 @@ export default function Projects() {
                   )}
                 </div>
                 
-                {/* Enlace a la universidad */}
-                <Link
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
-                >
-                  <span>Visit University</span>
-                  <svg
-                    className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                {/* Enlaces */}
+                <div className="flex items-center gap-4 flex-wrap">
+                  <Link
+                    href={project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </Link>
+                    <span>Visit University</span>
+                    <svg
+                      className="w-4 h-4 ml-1 hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </article>
             </InView>
