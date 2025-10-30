@@ -139,25 +139,17 @@ export default function Page() {
         >
           <div>
             <p className="text-lg leading-relaxed mb-4">
-              I'm a Telecommunications Engineer with over 3 years of experience in research, machine learning, and distributed systems. I'm passionate
-              about building end-to-end applications and enjoy working on projects in
-              tech environments.
+              I'm a Telecommunications Engineer who enjoys building simple, reliable systems that connect people and places. I'm curious about wireless networks and where applied AI genuinely improves the experience.
             </p>
             <p className="text-lg leading-relaxed mb-4">
-              I have a strong foundation in Python, Django, relational databases, and
-              production deployments. I am currently completing a Master's degree in
-              Advanced Telecommunications Technologies, specializing in Deep
-              Learning for Multimedia Processing.
+              I completed an MSc in Advanced Telecommunications Technologies (UPC) in 2025. I care about open-source, community networks, and making connectivity more accessible.
             </p>
             <p className="text-lg leading-relaxed mb-4">
-              I'm always eager to tackle the next challenge and learn new technologies.
-              My experience spans from developing scalable backend systems to implementing
-              cutting-edge machine learning solutions.
+              Day to day I prototype in Python, explore signals, and ship pragmatic end-to-end solutions.
             </p>
             <p className="text-lg leading-relaxed">
               Outside of technology, my hobbies include photography, traveling,
-              mountaineering, running and cycling. These experiences help me bring a unique perspective
-              to problem-solving and resilience in my work.
+              mountaineering, running and cycling. I've completed a few half marathons and am currently preparing for a marathon and an Ironman 70.3 in late spring 2026. Training for endurance events strengthens discipline, long-term planning, and data-driven iteration—all of which translate into focused, resilient problem-solving in my work.
             </p>
           </div>
         </InView>
