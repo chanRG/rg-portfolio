@@ -519,23 +519,25 @@ export default function DomeGallery({
         if (isMobile) {
           // Mobile optimizations - make photos much bigger
           if (isVertical) {
-            // Vertical photos on mobile: use significantly more height
-            const targetHeight = maxH * 1.8; // Use 180% of available height
-            scale = Math.min(maxW * 0.98 / natW, targetHeight / natH);
+            // Vertical photos on mobile: same width as horizontal, but taller
+            const targetHeight = maxH * 5.0; // Use 500% of available height
+            const targetWidth = maxW * 1.8; // Same width as horizontal photos
+            scale = Math.min(targetWidth / natW, targetHeight / natH);
           } else {
             // Horizontal photos on mobile: maximize width significantly
-            const targetWidth = maxW * 1.5; // Use 150% of available width
-            scale = Math.min(targetWidth / natW, maxH * 1.2 / natH);
+            const targetWidth = maxW * 1.8; // Use 180% of available width
+            scale = Math.min(targetWidth / natW, maxH * 1.4 / natH);
           }
         } else {
-          // Desktop scaling - keep original sizing
+          // Desktop scaling - make photos larger
           if (isVertical) {
             // For vertical photos, prioritize height and allow them to use more space
-            const targetHeight = maxH * 1.1; // Use 110% of available height for vertical photos
-            scale = Math.min(maxW / natW, targetHeight / natH);
+            const targetHeight = maxH * 1.4; // Use 140% of available height for vertical photos
+            scale = Math.min(maxW * 1.2 / natW, targetHeight / natH);
           } else {
-            // For horizontal photos, use standard scaling
-            scale = Math.min(maxW / natW, maxH / natH);
+            // For horizontal photos, use larger scaling
+            const targetWidth = maxW * 1.2; // Use 120% of available width
+            scale = Math.min(targetWidth / natW, maxH * 1.2 / natH);
           }
         }
         
