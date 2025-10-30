@@ -45,11 +45,17 @@ export default function GalleryPage() {
   const minRadius = isMobile ? 400 : 600; // Smaller minimum radius on mobile
 
   return (
-    <main className="mx-auto max-w-6xl px-0 sm:px-0 py-0 sm:py-0">
+    <main className="mx-auto max-w-6xl px-0 sm:px-0 py-0 sm:py-0" style={{ touchAction: isMobile ? "none" : "auto" }}>
       <NoScroll />
       <div
         className="gallery-page w-screen max-w-none relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] -mt-32 -mb-0"
-        style={{ height: galleryHeight, ["--viewer-pad" as any]: "16px", background: "transparent" }}
+        style={{ 
+          height: galleryHeight, 
+          overflow: "hidden",
+          touchAction: "none",
+          ["--viewer-pad" as any]: "16px", 
+          background: "transparent" 
+        }}
       >
         <DomeGallery 
           images={displayPhotos} 
