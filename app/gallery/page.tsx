@@ -1,14 +1,44 @@
+"use client";
+
 import { Metadata } from "next";
+import { useEffect, useState } from "react";
 import DomeGallery from "../components/dome-gallery";
 import NoScroll from "./no-scroll";
 import photosList from "./photos-list.json";
 
-export const metadata: Metadata = {
-  title: "Gallery",
-  description: "A 3D dome-style photo gallery.",
-};
-
 export default function GalleryPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Show all photos on both mobile and desktop
+  const displayPhotos = photosList;
+
+  // Reduce segments (tiles shown) on mobile for better performance
+  const segments = isMobile ? 20 : 35;
+
+  if (!isClient) {
+    return (
+      <main className="mx-auto max-w-6xl px-0 sm:px-0 py-0 sm:py-0">
+        <div 
+          className="w-screen max-w-none relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] -mt-32 -mb-0 flex items-center justify-center"
+          style={{ height: "100vh", background: "transparent" }}
+        >
+          <div className="text-gray-400">Loading gallery...</div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main className="mx-auto max-w-6xl px-0 sm:px-0 py-0 sm:py-0">
       <NoScroll />
@@ -16,7 +46,12 @@ export default function GalleryPage() {
         className="gallery-page w-screen max-w-none relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] -mt-32 -mb-0"
         style={{ height: "100vh", ["--viewer-pad" as any]: "16px", background: "transparent" }}
       >
-        <DomeGallery images={photosList} grayscale={false} overlayBlurColor="transparent" />
+        <DomeGallery 
+          images={displayPhotos} 
+          grayscale={false} 
+          overlayBlurColor="transparent"
+          segments={segments}
+        />
       </div>
     </main>
   );

@@ -5,7 +5,45 @@ const sharp = require('sharp');
 const photosDir = path.join(__dirname, '..', 'public', 'photos');
 const outputJsonPath = path.join(__dirname, '..', 'app', 'gallery', 'photos-list.json');
 const MAX_WIDTH = 2400; // Max width for high quality display
+const THUMB_WIDTH = 400; // Thumbnail width for gallery dome
 const QUALITY = 85; // JPEG quality
+const THUMB_QUALITY = 80; // Thumbnail quality
+
+async function generateThumbnail(imagePath) {
+  try {
+    const ext = path.extname(imagePath);
+    const lowerExt = ext.toLowerCase();
+    if (!['.jpg', '.jpeg', '.png'].includes(lowerExt)) {
+      return null;
+    }
+
+    const dir = path.dirname(imagePath);
+    const basename = path.basename(imagePath, ext);
+    const thumbPath = path.join(dir, `${basename}-thumb.jpg`);
+    
+    // Skip if thumbnail already exists and is newer than original
+    if (fs.existsSync(thumbPath)) {
+      const origStat = fs.statSync(imagePath);
+      const thumbStat = fs.statSync(thumbPath);
+      if (thumbStat.mtime > origStat.mtime) {
+        return thumbPath;
+      }
+    }
+
+    await sharp(imagePath)
+      .resize(THUMB_WIDTH, null, {
+        withoutEnlargement: true,
+        fit: 'inside'
+      })
+      .jpeg({ quality: THUMB_QUALITY, mozjpeg: true })
+      .toFile(thumbPath);
+    
+    return thumbPath;
+  } catch (error) {
+    console.error(`Error generating thumbnail for ${imagePath}:`, error.message);
+    return null;
+  }
+}
 
 async function compressImage(imagePath) {
   try {
@@ -50,6 +88,8 @@ async function getAllPhotos() {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       if (entry.name === '.DS_Store') continue;
+      // Skip thumbnail files
+      if (entry.name.includes('-thumb.')) continue;
       
       const abs = path.join(dir, entry.name);
       const url = path.posix.join(baseUrl, entry.name);
@@ -82,18 +122,42 @@ async function main() {
   const photos = await getAllPhotos();
   console.log(`✅ Found ${photos.length} photos`);
 
-  // Check if sharp is available for compression
-  let compressEnabled = true;
+  // Check if sharp is available
+  let sharpEnabled = true;
   try {
     require.resolve('sharp');
   } catch (e) {
-    console.warn('⚠️  sharp not installed, skipping image compression');
+    console.warn('⚠️  sharp not installed, skipping image optimization');
     console.warn('   Run: npm install --save-dev sharp');
-    compressEnabled = false;
+    sharpEnabled = false;
   }
 
-  // Optionally compress images
-  if (compressEnabled && process.env.COMPRESS_IMAGES === 'False') {
+  // Generate thumbnails
+  if (sharpEnabled) {
+    console.log('📸 Generating thumbnails...');
+    let generated = 0;
+    for (const photo of photos) {
+      const thumbPath = await generateThumbnail(photo.path);
+      if (thumbPath) {
+        // Convert file path to URL path
+        const relativePath = path.relative(path.join(__dirname, '..', 'public'), thumbPath);
+        photo.thumbSrc = '/' + relativePath.split(path.sep).join('/');
+        generated++;
+      } else {
+        // Fallback to original if thumbnail generation fails
+        photo.thumbSrc = photo.src;
+      }
+    }
+    console.log(`✅ Generated ${generated} thumbnails`);
+  } else {
+    // If sharp not available, use original images
+    photos.forEach(photo => {
+      photo.thumbSrc = photo.src;
+    });
+  }
+
+  // Optionally compress original images
+  if (sharpEnabled && process.env.COMPRESS_IMAGES === 'true') {
     console.log('🗜️  Compressing images...');
     let compressed = 0;
     for (const photo of photos) {
@@ -104,8 +168,8 @@ async function main() {
     console.log(`✅ Compressed ${compressed} images`);
   }
 
-  // Remove path from output JSON
-  const outputList = photos.map(({ src, alt }) => ({ src, alt }));
+  // Prepare output JSON with thumbnail paths
+  const outputList = photos.map(({ src, thumbSrc, alt }) => ({ src, thumbSrc, alt }));
 
   // Write photos list
   const outputDir = path.dirname(outputJsonPath);
