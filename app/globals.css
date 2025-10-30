@@ -44,6 +44,10 @@ html {
   @apply text-[#000000] dark:text-[#FFFFFF];
 }
 
+.prose p {
+  text-align: justify;
+}
+
 .prose .anchor {
   @apply absolute invisible no-underline;
   margin-left: -1em;
