@@ -28,6 +28,7 @@ type DomeGalleryProps = {
 
 type ItemDef = {
   src: string;
+  thumbSrc: string;
   alt: string;
   x: number;
   y: number;
@@ -97,7 +98,7 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
 
   const totalSlots = coords.length;
   if (pool.length === 0) {
-    return coords.map((c) => ({ ...c, src: "", alt: "" }));
+    return coords.map((c) => ({ ...c, src: "", thumbSrc: "", alt: "" }));
   }
   if (pool.length > totalSlots) {
     console.warn(
@@ -107,9 +108,12 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
 
   const normalizedImages = pool.map((image) => {
     if (typeof image === "string") {
-      return { src: image, alt: "" };
+      return { src: image, thumbSrc: image, alt: "" };
     }
-    return { src: image.src || "", alt: image.alt || "" };
+    const src = image.src || "";
+    // Use thumbSrc if provided, otherwise fallback to src
+    const thumbSrc = (image as any).thumbSrc || src;
+    return { src, thumbSrc, alt: image.alt || "" };
   });
 
   const usedImages = Array.from({ length: totalSlots }, (_, i) => normalizedImages[i % normalizedImages.length]);
@@ -130,6 +134,7 @@ function buildItems(pool: ImageItem[], seg: number): ItemDef[] {
   return coords.map((c, i) => ({
     ...c,
     src: usedImages[i].src,
+    thumbSrc: usedImages[i].thumbSrc,
     alt: usedImages[i].alt,
   }));
 }
@@ -471,6 +476,7 @@ export default function DomeGallery({
     const rawSrc = parent.dataset.src || (el.querySelector("img") as HTMLImageElement)?.src || "";
     const img = document.createElement("img");
     img.src = rawSrc;
+    img.loading = "lazy";
     overlay.appendChild(img);
     viewerRef.current!.appendChild(overlay);
 
@@ -771,7 +777,7 @@ export default function DomeGallery({
                   onClick={onTileClick}
                   onPointerUp={onTilePointerUp}
                 >
-                  <img src={it.src} draggable={false} alt={it.alt} />
+                  <img src={it.thumbSrc} draggable={false} alt={it.alt} loading="lazy" />
                 </div>
               </div>
             ))}
