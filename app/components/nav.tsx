@@ -9,7 +9,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = {
   "/": { name: "About me" },
-  "/experience": { name: "Resume" },
   "/blog": { name: "Blog" },
   "/gallery": { name: "Gallery" },
   // "/photos": { name: "Photos" },
