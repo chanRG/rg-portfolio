@@ -19,7 +19,7 @@ export default function Projects() {
   };
 
   return (
-    <section className="max-w-4xl mx-auto">
+    <section className="max-w-4xl mx-auto px-4 sm:px-6">
       <InView
         variants={{
           hidden: { opacity: 0, y: 100, filter: 'blur(4px)' },
@@ -28,7 +28,7 @@ export default function Projects() {
         viewOptions={{ amount: 0.3 }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
       >
-        <h1 className="mb-6 text-3xl font-bold text-center text-black dark:text-white">Resume</h1>
+        <h1 className="mb-6 text-2xl sm:text-3xl font-bold text-center text-black dark:text-white">Resume</h1>
       </InView>
       
       {/* Navigation Buttons */}
@@ -40,10 +40,10 @@ export default function Projects() {
         viewOptions={{ amount: 0.3 }}
         transition={{ duration: 0.4, ease: 'easeInOut', delay: 0.1 }}
       >
-        <div className="flex justify-center flex-wrap gap-2 mb-12">
+        <div className="flex justify-center flex-wrap gap-2 mb-8 sm:mb-12">
         <button
           onClick={() => scrollToSection('work-experience')}
-          className="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
+          className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs sm:text-sm"
         >
           <svg className="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
@@ -52,7 +52,7 @@ export default function Projects() {
         </button>
         <button
           onClick={() => scrollToSection('personal-projects')}
-          className="inline-flex items-center px-3 py-1.5 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
+          className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs sm:text-sm"
         >
           <svg className="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
@@ -61,7 +61,7 @@ export default function Projects() {
         </button>
         <button
           onClick={() => scrollToSection('education')}
-          className="inline-flex items-center px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs"
+          className="inline-flex items-center px-3 py-1.5 sm:px-4 sm:py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md hover:shadow-lg text-xs sm:text-sm"
         >
           <svg className="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -73,7 +73,7 @@ export default function Projects() {
       </InView>
       
       {/* Work Experience Section */}
-      <div id="work-experience" className="mb-12">
+      <div id="work-experience" className="mb-8 sm:mb-12">
         <InView
           variants={{
             hidden: { opacity: 0, x: -100, filter: 'blur(4px)' },
@@ -82,7 +82,7 @@ export default function Projects() {
           viewOptions={{ amount: 0.3 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
-          <h2 className="text-xl font-semibold mb-6 text-black dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-black dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
             Work Experience
           </h2>
         </InView>
@@ -97,17 +97,17 @@ export default function Projects() {
               viewOptions={{ amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }}
             >
-              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 md:hover:scale-105 border border-neutral-200 dark:border-neutral-700">
               {/* Colored accent bar */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>
               {/* Contenido de la tarjeta */}
-              <div className="p-6 flex flex-col justify-between">
+              <div className="p-4 sm:p-6 flex flex-col justify-between">
                 <div>
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-xl font-semibold text-black dark:text-white">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                    <h2 className="text-lg sm:text-xl font-semibold text-black dark:text-white">
                       {project.title}
                     </h2>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded border border-blue-200 dark:border-blue-800 whitespace-nowrap">
+                    <span className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 bg-blue-50 dark:bg-blue-950/30 px-2 py-1 rounded border border-blue-200 dark:border-blue-800 whitespace-nowrap self-start">
                       {project.year}
                     </span>
                   </div>
@@ -115,10 +115,10 @@ export default function Projects() {
                   {/* Company and Location */}
                   {project.company && (
                     <div className="mb-3">
-                      <p className="text-lg font-medium text-blue-600 dark:text-blue-400">
+                      <p className="text-base sm:text-lg font-medium text-blue-600 dark:text-blue-400">
                         {project.company}
                         {project.location && (
-                          <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-2">
+                          <span className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 ml-1 sm:ml-2">
                             | {project.location}
                           </span>
                         )}
@@ -126,14 +126,14 @@ export default function Projects() {
                     </div>
                   )}
                   
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                  <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4 text-justify">
                     {project.description}
                   </p>
                   
                   {/* Tags */}
                   {project.tags && (
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                    <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
+                      {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
                           className="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded"
@@ -141,22 +141,17 @@ export default function Projects() {
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 4 && (
-                        <span className="text-xs text-neutral-500 dark:text-neutral-400 px-2 py-1">
-                          +{project.tags.length - 4}
-                        </span>
-                      )}
                     </div>
                   )}
                 </div>
                 
                 {/* Enlaces */}
-                <div className="flex items-center gap-4 flex-wrap">
+                <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                   <Link
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                    className="flex items-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                   >
                     <span>Visit Company</span>
                     <svg
@@ -178,7 +173,7 @@ export default function Projects() {
                       href={project.workUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="flex items-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     >
                       <span>View Work</span>
                       <svg
@@ -201,7 +196,7 @@ export default function Projects() {
                       href={project.thesisUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="flex items-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     >
                       <span>View Thesis</span>
                       <svg
@@ -228,7 +223,7 @@ export default function Projects() {
       </div>
 
       {/* Personal Projects Section */}
-      <div id="personal-projects" className="mb-12">
+      <div id="personal-projects" className="mb-8 sm:mb-12">
         <InView
           variants={{
             hidden: { opacity: 0, x: -100, filter: 'blur(4px)' },
@@ -237,7 +232,7 @@ export default function Projects() {
           viewOptions={{ amount: 0.3 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
-          <h2 className="text-xl font-semibold mb-6 text-black dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-black dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
             Personal Projects
           </h2>
         </InView>
@@ -252,17 +247,17 @@ export default function Projects() {
               viewOptions={{ amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }}
             >
-              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 md:hover:scale-105 border border-neutral-200 dark:border-neutral-700">
               {/* Colored accent bar */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-purple-500"></div>
               {/* Contenido de la tarjeta */}
-              <div className="p-6 flex flex-col justify-between">
+              <div className="p-4 sm:p-6 flex flex-col justify-between">
                 <div>
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-xl font-semibold text-black dark:text-white">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                    <h2 className="text-lg sm:text-xl font-semibold text-black dark:text-white">
                       {project.title}
                     </h2>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-purple-50 dark:bg-purple-950/30 px-2 py-1 rounded border border-purple-200 dark:border-purple-800 whitespace-nowrap">
+                    <span className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 bg-purple-50 dark:bg-purple-950/30 px-2 py-1 rounded border border-purple-200 dark:border-purple-800 whitespace-nowrap self-start">
                       {project.year}
                     </span>
                   </div>
@@ -270,10 +265,10 @@ export default function Projects() {
                   {/* Project and Location */}
                   {project.project && (
                     <div className="mb-3">
-                      <p className="text-lg font-medium text-purple-600 dark:text-purple-400">
+                      <p className="text-base sm:text-lg font-medium text-purple-600 dark:text-purple-400">
                         {project.project}
                         {project.location && (
-                          <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-2">
+                          <span className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 ml-1 sm:ml-2">
                             | {project.location}
                           </span>
                         )}
@@ -281,14 +276,14 @@ export default function Projects() {
                     </div>
                   )}
                   
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                  <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4 text-justify">
                     {project.description}
                   </p>
                   
                   {/* Tags */}
                   {project.tags && (
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                    <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
+                      {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
                           className="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded"
@@ -296,22 +291,17 @@ export default function Projects() {
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 4 && (
-                        <span className="text-xs text-neutral-500 dark:text-neutral-400 px-2 py-1">
-                          +{project.tags.length - 4}
-                        </span>
-                      )}
                     </div>
                   )}
                 </div>
                 
                 {/* Enlaces */}
-                <div className="flex items-center gap-4 flex-wrap">
+                <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                   <Link
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                    className="flex items-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                   >
                     <span>View Project</span>
                     <svg
@@ -346,7 +336,7 @@ export default function Projects() {
           viewOptions={{ amount: 0.3 }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
-          <h2 className="text-xl font-semibold mb-6 text-black dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4 sm:mb-6 text-black dark:text-white border-b border-neutral-200 dark:border-neutral-700 pb-2">
             Education
           </h2>
         </InView>
@@ -361,17 +351,17 @@ export default function Projects() {
               viewOptions={{ amount: 0.2 }}
               transition={{ duration: 0.5, ease: 'easeInOut', delay: index * 0.1 }}
             >
-              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-neutral-200 dark:border-neutral-700">
+              <article className="group relative bg-white dark:bg-neutral-900 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 md:hover:scale-105 border border-neutral-200 dark:border-neutral-700">
               {/* Colored accent bar */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-green-500"></div>
               {/* Contenido de la tarjeta */}
-              <div className="p-6 flex flex-col justify-between">
+              <div className="p-4 sm:p-6 flex flex-col justify-between">
                 <div>
-                  <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-xl font-semibold text-black dark:text-white">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-2">
+                    <h2 className="text-lg sm:text-xl font-semibold text-black dark:text-white">
                       {project.title}
                     </h2>
-                    <span className="text-sm text-neutral-500 dark:text-neutral-400 bg-green-50 dark:bg-green-950/30 px-2 py-1 rounded border border-green-200 dark:border-green-800 whitespace-nowrap">
+                    <span className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 bg-green-50 dark:bg-green-950/30 px-2 py-1 rounded border border-green-200 dark:border-green-800 whitespace-nowrap self-start">
                       {project.year}
                     </span>
                   </div>
@@ -379,10 +369,10 @@ export default function Projects() {
                   {/* University and Location */}
                   {project.university && (
                     <div className="mb-3">
-                      <p className="text-lg font-medium text-green-600 dark:text-green-400">
+                      <p className="text-base sm:text-lg font-medium text-green-600 dark:text-green-400">
                         {project.university}
                         {project.location && (
-                          <span className="text-sm text-neutral-500 dark:text-neutral-400 ml-2">
+                          <span className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 ml-1 sm:ml-2">
                             | {project.location}
                           </span>
                         )}
@@ -390,14 +380,14 @@ export default function Projects() {
                     </div>
                   )}
                   
-                  <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                  <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mb-3 sm:mb-4 text-justify">
                     {project.description}
                   </p>
                   
                   {/* Tags */}
                   {project.tags && (
-                    <div className="flex flex-wrap gap-1 mb-4">
-                      {project.tags.slice(0, 4).map((tag, tagIndex) => (
+                    <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
+                      {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
                           className="text-xs bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 px-2 py-1 rounded"
@@ -405,22 +395,17 @@ export default function Projects() {
                           {tag}
                         </span>
                       ))}
-                      {project.tags.length > 4 && (
-                        <span className="text-xs text-neutral-500 dark:text-neutral-400 px-2 py-1">
-                          +{project.tags.length - 4}
-                        </span>
-                      )}
                     </div>
                   )}
                 </div>
                 
                 {/* Enlaces */}
-                <div className="flex items-center gap-4 flex-wrap">
+                <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
                   <Link
                     href={project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center text-sm text-neutral-500 dark:text-neutral-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                    className="flex items-center text-xs sm:text-sm text-neutral-500 dark:text-neutral-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
                   >
                     <span>Visit University</span>
                     <svg

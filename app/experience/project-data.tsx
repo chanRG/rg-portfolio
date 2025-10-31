@@ -74,6 +74,17 @@ export const projects: Project[] = [
     location: "Gochas, Namibia",
   },
   {
+    title: "4Forms - Service Forms Automation",
+    year: "Sept 2025 - present",
+    description:
+      "End‑to‑end platform that replaces paper service forms with a 1‑minute workflow. Technicians log time, expenses, and materials on‑site, customers e‑sign, and branded PDFs are emailed automatically. Deployed at Engi‑ON to cut admin work, speed up billing, and improve client experience.",
+    url: "",
+    tags: ["Django", "REST API", "JWT", "ReportLab", "Mailjet", "PostgreSQL", "Docker", "Nginx"],
+    type: "personal",
+    project: "Engi-ON",
+    location: "Barcelona, Spain",
+  },
+  {
     title: "Hahatay Community Network",
     year: "Mar 2022 - present",
     description:
