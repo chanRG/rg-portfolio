@@ -180,11 +180,11 @@ export function PillNav({
   const isRouterLink = (href?: string) => href && !isExternalLink(href);
 
   const cssVars = {
-    ["--base"]: baseColor,
-    ["--pill-bg"]: pillColor,
-    ["--hover-text"]: hoveredPillTextColor,
-    ["--pill-text"]: pillTextColor ?? baseColor,
-  } satisfies CSSProperties;
+    "--base": baseColor,
+    "--pill-bg": pillColor,
+    "--hover-text": hoveredPillTextColor,
+    "--pill-text": pillTextColor ?? baseColor,
+  } as CSSProperties;
 
   const logoDestination = logoHref ?? items[0]?.href ?? "/";
 
