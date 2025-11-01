@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { metaData } from "../lib/config";
@@ -15,6 +15,7 @@ const navItems: PillNavItem[] = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const navRef = useRef<HTMLElement>(null);
 
   const activeHref = useMemo(() => {
     if (!pathname) return undefined;
@@ -24,9 +25,43 @@ export function Navbar() {
     return matched?.href ?? pathname;
   }, [pathname]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const root = document.documentElement;
+
+    const updateNavMetrics = () => {
+      const el = navRef.current;
+      if (!el) return;
+      const styles = window.getComputedStyle(el);
+      const marginTop = parseFloat(styles.marginTop) || 0;
+      const marginBottom = parseFloat(styles.marginBottom) || 0;
+      const height = el.offsetHeight + marginTop + marginBottom;
+      root.style.setProperty("--nav-height", `${Math.round(height)}px`);
+    };
+
+    updateNavMetrics();
+
+    const target = navRef.current;
+    const observer = target ? new ResizeObserver(updateNavMetrics) : null;
+    if (observer && target) {
+      observer.observe(target);
+    }
+
+    window.addEventListener("resize", updateNavMetrics);
+
+    return () => {
+      if (observer && target) {
+        observer.unobserve(target);
+      }
+      window.removeEventListener("resize", updateNavMetrics);
+    };
+  }, []);
+
   return (
     <motion.nav
+      ref={navRef}
       className="fixed top-0 left-0 right-0 z-50 bg-transparent"
+      id="site-navbar"
       style={{ transition: "all 0.3s ease" }}
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6">

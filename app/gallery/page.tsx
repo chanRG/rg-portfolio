@@ -1,6 +1,5 @@
 "use client";
 
-import { Metadata } from "next";
 import { useEffect, useState } from "react";
 import DomeGallery from "../components/dome-gallery";
 import NoScroll from "./no-scroll";
@@ -28,45 +27,59 @@ export default function GalleryPage() {
 
   if (!isClient) {
     return (
-      <main className="mx-auto max-w-6xl px-0 sm:px-0 py-0 sm:py-0">
-        <div 
-          className="w-screen max-w-none relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] -mt-32 -mb-0 flex items-center justify-center"
-          style={{ height: "100vh", background: "transparent" }}
+      <>
+        <NoScroll />
+        <div
+          className="gallery-container relative -mx-6 flex items-center justify-center overflow-hidden sm:-mx-4 md:mx-0"
+          style={{
+            height: "calc(100vh - var(--nav-height, 80px) - var(--footer-height, 100px) - 64px)",
+            minHeight: "400px",
+            width: "100vw",
+            marginLeft: "calc(50% - 50vw)",
+            marginRight: "calc(50% - 50vw)",
+            background: "transparent",
+          }}
         >
           <div className="text-gray-400">Loading gallery...</div>
         </div>
-      </main>
+      </>
     );
   }
 
   // Adjust gallery settings for mobile
-  const galleryHeight = isMobile ? "100vh" : "100vh";
-  const fit = isMobile ? 0.35 : 0.5; // Smaller fit on mobile to make dome smaller
-  const minRadius = isMobile ? 400 : 600; // Smaller minimum radius on mobile
+  const fit = isMobile ? 0.35 : 0.5;
+  const minRadius = isMobile ? 400 : 600;
+  const viewerPad = isMobile ? "12px" : "20px";
+  const verticalBuffer = isMobile ? 64 : 64;
 
   return (
-    <main className="mx-auto max-w-6xl px-0 sm:px-0 py-0 sm:py-0" style={{ touchAction: isMobile ? "none" : "auto" }}>
+    <>
       <NoScroll />
       <div
-        className="gallery-page w-screen max-w-none relative left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] -mt-32 -mb-0"
-        style={{ 
-          height: galleryHeight, 
+        className="gallery-container relative -mx-6 flex items-center justify-center overflow-hidden sm:-mx-4 md:mx-0"
+        style={{
+          height: `calc(100vh - var(--nav-height, 80px) - var(--footer-height, 100px) - ${verticalBuffer}px)`,
+          minHeight: isMobile ? "400px" : "500px",
+          width: "100vw",
+          marginLeft: "calc(50% - 50vw)",
+          marginRight: "calc(50% - 50vw)",
           overflow: "hidden",
           touchAction: "none",
-          ["--viewer-pad" as any]: "16px", 
-          background: "transparent" 
+          ["--viewer-pad" as any]: viewerPad,
+          background: "transparent",
         }}
       >
-        <DomeGallery 
-          images={displayPhotos} 
-          grayscale={false} 
+        <DomeGallery
+          images={displayPhotos}
+          grayscale={false}
           overlayBlurColor="transparent"
           segments={segments}
           fit={fit}
           minRadius={minRadius}
+          padFactor={isMobile ? 0.2 : 0.25}
         />
       </div>
-    </main>
+    </>
   );
 }
 

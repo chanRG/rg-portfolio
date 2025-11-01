@@ -73,20 +73,27 @@ export default function RootLayout({
           title="JSON Feed"
         />
       </head>
-      <body className="antialiased flex flex-col items-center justify-center mx-auto mb-12">
+      <body className="antialiased min-h-screen">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >
-          <main className="flex-auto min-w-0 flex flex-col px-6 sm:px-4 md:px-0 max-w-[624px] w-full pt-32">
+          <div className="flex min-h-screen w-full flex-col items-center">
             <Navbar />
-            {children}
-            <Footer />
-            <Analytics />
-            <SpeedInsights />
-          </main>
+            <div className="flex w-full max-w-[624px] flex-1 flex-col px-6 sm:px-4 md:px-0">
+              <main
+                className="flex-1"
+                style={{ paddingTop: "calc(var(--nav-height, 0px) + 32px)" }}
+              >
+                {children}
+              </main>
+              <Footer />
+              <Analytics />
+              <SpeedInsights />
+            </div>
+          </div>
         </ThemeProvider>
       </body>
     </html>
