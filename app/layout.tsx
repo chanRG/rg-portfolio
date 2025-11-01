@@ -52,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className}`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.className} dark`} suppressHydrationWarning>
       <head>
         <link
           rel="alternate"
@@ -76,9 +76,10 @@ export default function RootLayout({
       <body className="antialiased min-h-screen">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
+          forcedTheme="dark"
         >
           <div className="flex min-h-screen w-full flex-col items-center">
             <Navbar />

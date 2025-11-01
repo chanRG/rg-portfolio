@@ -30,13 +30,10 @@ export default function GalleryPage() {
       <>
         <NoScroll />
         <div
-          className="gallery-container relative -mx-6 flex items-center justify-center overflow-hidden sm:-mx-4 md:mx-0"
+          className="fixed inset-0 flex items-center justify-center overflow-hidden"
           style={{
-            height: "calc(100vh - var(--nav-height, 80px) - var(--footer-height, 100px) - 64px)",
-            minHeight: "400px",
-            width: "100vw",
-            marginLeft: "calc(50% - 50vw)",
-            marginRight: "calc(50% - 50vw)",
+            top: "var(--nav-height, 80px)",
+            bottom: "var(--footer-height, 100px)",
             background: "transparent",
           }}
         >
@@ -50,20 +47,15 @@ export default function GalleryPage() {
   const fit = isMobile ? 0.35 : 0.5;
   const minRadius = isMobile ? 400 : 600;
   const viewerPad = isMobile ? "12px" : "20px";
-  const verticalBuffer = isMobile ? 64 : 64;
 
   return (
     <>
       <NoScroll />
       <div
-        className="gallery-container relative -mx-6 flex items-center justify-center overflow-hidden sm:-mx-4 md:mx-0"
+        className="fixed inset-0 flex items-center justify-center overflow-hidden"
         style={{
-          height: `calc(100vh - var(--nav-height, 80px) - var(--footer-height, 100px) - ${verticalBuffer}px)`,
-          minHeight: isMobile ? "400px" : "500px",
-          width: "100vw",
-          marginLeft: "calc(50% - 50vw)",
-          marginRight: "calc(50% - 50vw)",
-          overflow: "hidden",
+          top: "var(--nav-height, 80px)",
+          bottom: "var(--footer-height, 100px)",
           touchAction: "none",
           ["--viewer-pad" as any]: viewerPad,
           background: "transparent",
