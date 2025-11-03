@@ -517,16 +517,16 @@ export default function DomeGallery({
         // Adjust scaling based on orientation and device type
         let scale;
         if (isMobile) {
-          // Mobile optimizations - make photos much bigger
+          // Mobile optimizations
           if (isVertical) {
-            // Vertical photos on mobile: same width as horizontal, but taller
-            const targetHeight = maxH * 5.0; // Use 500% of available height
-            const targetWidth = maxW * 1.8; // Same width as horizontal photos
+            // Vertical photos on mobile: fit nicely in viewport
+            const targetHeight = maxH * 2.8; // Use 280% of available height
+            const targetWidth = maxW * 1.3; // Use 130% of available width
             scale = Math.min(targetWidth / natW, targetHeight / natH);
           } else {
-            // Horizontal photos on mobile: maximize width significantly
-            const targetWidth = maxW * 1.8; // Use 180% of available width
-            scale = Math.min(targetWidth / natW, maxH * 1.4 / natH);
+            // Horizontal photos on mobile: maximize width moderately
+            const targetWidth = maxW * 1.4; // Use 140% of available width
+            scale = Math.min(targetWidth / natW, maxH * 1.1 / natH);
           }
         } else {
           // Desktop scaling - make photos larger

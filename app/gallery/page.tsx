@@ -1,9 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import DomeGallery from "../components/dome-gallery";
 import NoScroll from "./no-scroll";
 import photosList from "./photos-list.json";
+
+// Fisher-Yates shuffle algorithm
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 export default function GalleryPage() {
   const [isMobile, setIsMobile] = useState(false);
@@ -19,8 +29,8 @@ export default function GalleryPage() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Show all photos on both mobile and desktop
-  const displayPhotos = photosList;
+  // Randomize photos on each page load
+  const displayPhotos = useMemo(() => shuffleArray(photosList), []);
 
   // Reduce segments (tiles shown) on mobile for better performance
   const segments = isMobile ? 20 : 35;
