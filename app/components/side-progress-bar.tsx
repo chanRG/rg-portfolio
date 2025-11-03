@@ -69,7 +69,7 @@ export function SideProgressBar() {
     <div className="hidden xl:fixed xl:right-8 xl:top-1/2 xl:-translate-y-1/2 xl:flex xl:flex-col xl:gap-8 z-40">
       <div className="relative">
         {/* Vertical line connecting all sections */}
-        <div className="absolute right-[11px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-200/50 via-purple-200/50 to-blue-200/50 dark:from-blue-800/50 dark:via-purple-800/50 dark:to-blue-800/50" />
+        <div className="absolute right-[9px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-blue-200/50 via-purple-200/50 to-blue-200/50 dark:from-blue-800/50 dark:via-purple-800/50 dark:to-blue-800/50" />
 
         {/* Section indicators */}
         <div className="flex flex-col gap-7 relative">
