@@ -70,7 +70,7 @@ const DEFAULT_IMAGES: ImageItem[] = [
 const DEFAULTS = {
   maxVerticalRotationDeg: 5,
   dragSensitivity: 20,
-  enlargeTransitionMs: 300,
+  enlargeTransitionMs: 400,
   segments: 35,
 };
 
@@ -469,102 +469,104 @@ export default function DomeGallery({
     overlay.style.height = frameR.height + "px";
     overlay.style.opacity = "0";
     overlay.style.zIndex = "30";
-    overlay.style.willChange = "transform, opacity";
-    overlay.style.transformOrigin = "top left";
-    overlay.style.transition = `transform ${enlargeTransitionMs}ms ease, opacity ${enlargeTransitionMs}ms ease`;
+    overlay.style.willChange = "left, top, width, height, opacity";
+    overlay.style.transition = `left ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1), top ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1), width ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1), height ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1), opacity ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1)`;
 
     const rawSrc = parent.dataset.src || (el.querySelector("img") as HTMLImageElement)?.src || "";
     const img = document.createElement("img");
     img.src = rawSrc;
-    img.loading = "lazy";
+    img.loading = "eager";
     overlay.appendChild(img);
     viewerRef.current!.appendChild(overlay);
 
-    const tx0 = tileR.left - frameR.left;
-    const ty0 = tileR.top - frameR.top;
-    const sx0 = tileR.width / frameR.width;
-    const sy0 = tileR.height / frameR.height;
-
-    const validSx0 = isFinite(sx0) && sx0 > 0 ? sx0 : 1;
-    const validSy0 = isFinite(sy0) && sy0 > 0 ? sy0 : 1;
-
-    overlay.style.transform = `translate(${tx0}px, ${ty0}px) scale(${validSx0}, ${validSy0})`;
-
-    setTimeout(() => {
-      if (!overlay.parentElement) return;
-      overlay.style.opacity = "1";
-      overlay.style.transform = "translate(0px, 0px) scale(1, 1)";
-      rootRef.current?.setAttribute("data-enlarging", "true");
-    }, 16);
-
-    // After the initial opening animation, resize to the image's natural size
-    // (up to the viewer frame bounds) to show full resolution without cropping.
-    const onFirstEnd = (ev: TransitionEvent) => {
-      if (ev.propertyName !== "transform") return;
-      overlay.removeEventListener("transitionend", onFirstEnd);
-
-      const prevTransition = overlay.style.transition;
-      const doResize = () => {
-        const natW = img.naturalWidth || 0;
-        const natH = img.naturalHeight || 0;
-        if (!natW || !natH) return;
-
-        const isVertical = natH > natW;
-        const maxW = frameR.width;
-        const maxH = frameR.height;
-        const isMobile = window.innerWidth <= 768;
-        
-        // Adjust scaling based on orientation and device type
-        let scale;
-        if (isMobile) {
-          // Mobile optimizations
-          if (isVertical) {
-            // Vertical photos on mobile: fit nicely in viewport
-            const targetHeight = maxH * 2.8; // Use 280% of available height
-            const targetWidth = maxW * 1.3; // Use 130% of available width
-            scale = Math.min(targetWidth / natW, targetHeight / natH);
-          } else {
-            // Horizontal photos on mobile: maximize width moderately
-            const targetWidth = maxW * 1.4; // Use 140% of available width
-            scale = Math.min(targetWidth / natW, maxH * 1.1 / natH);
-          }
+    // Calculate final size immediately
+    const calculateFinalSize = () => {
+      const natW = img.naturalWidth || frameR.width;
+      const natH = img.naturalHeight || frameR.height;
+      
+      const isVertical = natH > natW;
+      const maxW = frameR.width;
+      const maxH = frameR.height;
+      const isMobile = window.innerWidth <= 768;
+      
+      // Adjust scaling based on orientation and device type
+      let scale;
+      if (isMobile) {
+        // Mobile optimizations
+        if (isVertical) {
+          const targetHeight = maxH * 2.8;
+          const targetWidth = maxW * 1.3;
+          scale = Math.min(targetWidth / natW, targetHeight / natH);
         } else {
-          // Desktop scaling - make photos larger
-          if (isVertical) {
-            // For vertical photos, prioritize height and allow them to use more space
-            const targetHeight = maxH * 1.4; // Use 140% of available height for vertical photos
-            scale = Math.min(maxW * 1.2 / natW, targetHeight / natH);
-          } else {
-            // For horizontal photos, use larger scaling
-            const targetWidth = maxW * 1.2; // Use 120% of available width
-            scale = Math.min(targetWidth / natW, maxH * 1.2 / natH);
-          }
+          const targetWidth = maxW * 1.4;
+          scale = Math.min(targetWidth / natW, maxH * 1.1 / natH);
         }
-        
-        const finalW = Math.round(natW * scale);
-        const finalH = Math.round(natH * scale);
-        const centeredLeft = frameR.left - mainR.left + (frameR.width - finalW) / 2;
-        const centeredTop = frameR.top - mainR.top + (frameR.height - finalH) / 2;
-
-        overlay.style.transition = `left ${enlargeTransitionMs}ms ease, top ${enlargeTransitionMs}ms ease, width ${enlargeTransitionMs}ms ease, height ${enlargeTransitionMs}ms ease`;
-        requestAnimationFrame(() => {
-          overlay.style.left = `${centeredLeft}px`;
-          overlay.style.top = `${centeredTop}px`;
-          overlay.style.width = `${finalW}px`;
-          overlay.style.height = `${finalH}px`;
-        });
-
-        const cleanupSecond = () => {
-          overlay.removeEventListener("transitionend", cleanupSecond);
-          overlay.style.transition = prevTransition;
-        };
-        overlay.addEventListener("transitionend", cleanupSecond, { once: true });
-      };
-
-      if (img.complete) doResize();
-      else img.onload = () => doResize();
+      } else {
+        // Desktop scaling
+        if (isVertical) {
+          const targetHeight = maxH * 1.4;
+          scale = Math.min(maxW * 1.2 / natW, targetHeight / natH);
+        } else {
+          const targetWidth = maxW * 1.2;
+          scale = Math.min(targetWidth / natW, maxH * 1.2 / natH);
+        }
+      }
+      
+      const finalW = Math.round(natW * scale);
+      const finalH = Math.round(natH * scale);
+      return { finalW, finalH };
     };
-    overlay.addEventListener("transitionend", onFirstEnd);
+
+    // Wait for image to load before animating
+    const animate = () => {
+      const { finalW, finalH } = calculateFinalSize();
+      const finalLeft = frameR.left - mainR.left + (frameR.width - finalW) / 2;
+      const finalTop = frameR.top - mainR.top + (frameR.height - finalH) / 2;
+
+      // Calculate initial dimensions that maintain the image's aspect ratio
+      const imageAspect = img.naturalHeight / img.naturalWidth;
+      const tileAspect = tileR.height / tileR.width;
+      
+      let startW, startH;
+      if (imageAspect > tileAspect) {
+        // Image is more vertical than tile - fit by height
+        startH = tileR.height;
+        startW = startH / imageAspect;
+      } else {
+        // Image is more horizontal than tile - fit by width
+        startW = tileR.width;
+        startH = startW * imageAspect;
+      }
+      
+      const startLeft = tileR.left - mainR.left + (tileR.width - startW) / 2;
+      const startTop = tileR.top - mainR.top + (tileR.height - startH) / 2;
+
+      // Set initial position with proper aspect ratio
+      overlay.style.left = `${startLeft}px`;
+      overlay.style.top = `${startTop}px`;
+      overlay.style.width = `${startW}px`;
+      overlay.style.height = `${startH}px`;
+      overlay.style.opacity = "0";
+
+      // Force reflow
+      void overlay.offsetHeight;
+
+      // Animate to final position
+      requestAnimationFrame(() => {
+        overlay.style.opacity = "1";
+        overlay.style.left = `${finalLeft}px`;
+        overlay.style.top = `${finalTop}px`;
+        overlay.style.width = `${finalW}px`;
+        overlay.style.height = `${finalH}px`;
+        rootRef.current?.setAttribute("data-enlarging", "true");
+      });
+    };
+
+    if (img.complete && img.naturalWidth) {
+      animate();
+    } else {
+      img.onload = () => animate();
+    }
   };
 
   const onTileClick = useCallback(
@@ -649,7 +651,7 @@ export default function DomeGallery({
         border-radius: var(--enlarge-radius, 32px);
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0,0,0,.35);
-        transition: all ${enlargeTransitionMs}ms ease-out;
+        transition: all ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1);
         pointer-events: none;
         margin: 0;
         transform: none;
@@ -695,7 +697,7 @@ export default function DomeGallery({
 
           requestAnimationFrame(() => {
             parent.style.transition = "";
-            el.style.transition = "opacity 300ms ease-out";
+            el.style.transition = "opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)";
 
             requestAnimationFrame(() => {
               el.style.opacity = "1";
