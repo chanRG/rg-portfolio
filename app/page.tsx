@@ -45,7 +45,7 @@ export default function Page() {
         <div className="flex-1 text-center lg:text-left">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Hi,<br />
-            I'm Roger Gonzalez Sedano
+            I'm Roger Gonzalez
           </h1>
           <div className="text-xl text-neutral-600 dark:text-neutral-400 mb-6">
             <TextScramble
@@ -79,7 +79,7 @@ export default function Page() {
               View Experience
             </button>
             <a
-              href="/cv_RogerGonzalezSedano_sept.pdf"
+              href="/cv_RogerGonzalezSedano.pdf"
               download
               className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-md hover:shadow-lg text-sm"
             >

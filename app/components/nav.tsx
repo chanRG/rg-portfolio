@@ -67,9 +67,6 @@ export function Navbar() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="relative flex flex-col gap-3 py-4 md:flex-row md:items-center md:justify-center">
           <PillNav
-            logo="/logo.png"
-            logoAlt={metaData.title}
-            logoHref="/"
             items={navItems}
             activeHref={activeHref}
             className="w-full md:w-auto"

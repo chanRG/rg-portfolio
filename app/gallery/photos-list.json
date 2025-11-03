@@ -95,6 +95,56 @@
     "alt": "sunset_seleki"
   },
   {
+    "src": "/photos/galleria/000026.jpg",
+    "thumbSrc": "/photos/galleria/000026-thumb.jpg",
+    "alt": "000026"
+  },
+  {
+    "src": "/photos/galleria/000032460033.JPG",
+    "thumbSrc": "/photos/galleria/000032460033-thumb.jpg",
+    "alt": "000032460033"
+  },
+  {
+    "src": "/photos/galleria/000032460034.jpg",
+    "thumbSrc": "/photos/galleria/000032460034-thumb.jpg",
+    "alt": "000032460034"
+  },
+  {
+    "src": "/photos/galleria/000054670010.jpg",
+    "thumbSrc": "/photos/galleria/000054670010-thumb.jpg",
+    "alt": "000054670010"
+  },
+  {
+    "src": "/photos/galleria/000081900009.JPG",
+    "thumbSrc": "/photos/galleria/000081900009-thumb.jpg",
+    "alt": "000081900009"
+  },
+  {
+    "src": "/photos/galleria/000087910003.jpg",
+    "thumbSrc": "/photos/galleria/000087910003-thumb.jpg",
+    "alt": "000087910003"
+  },
+  {
+    "src": "/photos/galleria/000087910014.jpg",
+    "thumbSrc": "/photos/galleria/000087910014-thumb.jpg",
+    "alt": "000087910014"
+  },
+  {
+    "src": "/photos/galleria/3630-15.jpg",
+    "thumbSrc": "/photos/galleria/3630-15-thumb.jpg",
+    "alt": "3630-15"
+  },
+  {
+    "src": "/photos/galleria/classicu 2024-05-04 125210.477.JPG",
+    "thumbSrc": "/photos/galleria/classicu 2024-05-04 125210.477-thumb.jpg",
+    "alt": "classicu 2024-05-04 125210.477"
+  },
+  {
+    "src": "/photos/galleria/dji_fly_20250316_173206_0020_1742164734164_photo-4 2.jpg",
+    "thumbSrc": "/photos/galleria/dji_fly_20250316_173206_0020_1742164734164_photo-4 2-thumb.jpg",
+    "alt": "dji_fly_20250316_173206_0020_1742164734164_photo-4 2"
+  },
+  {
     "src": "/photos/lofoten/haukland.JPG",
     "thumbSrc": "/photos/lofoten/haukland-thumb.jpg",
     "alt": "haukland"
@@ -235,6 +285,11 @@
     "alt": "000047"
   },
   {
+    "src": "/photos/oman/000081900023.jpg",
+    "thumbSrc": "/photos/oman/000081900023-thumb.jpg",
+    "alt": "000081900023"
+  },
+  {
     "src": "/photos/oman/alhajar.JPG",
     "thumbSrc": "/photos/oman/alhajar-thumb.jpg",
     "alt": "alhajar"
@@ -310,6 +365,31 @@
     "alt": "wadi_tanuf"
   },
   {
+    "src": "/photos/uzb/000002 2.jpg",
+    "thumbSrc": "/photos/uzb/000002 2-thumb.jpg",
+    "alt": "000002 2"
+  },
+  {
+    "src": "/photos/uzb/000004 2.JPG",
+    "thumbSrc": "/photos/uzb/000004 2-thumb.jpg",
+    "alt": "000004 2"
+  },
+  {
+    "src": "/photos/uzb/000005 2.jpg",
+    "thumbSrc": "/photos/uzb/000005 2-thumb.jpg",
+    "alt": "000005 2"
+  },
+  {
+    "src": "/photos/uzb/000037 2.jpg",
+    "thumbSrc": "/photos/uzb/000037 2-thumb.jpg",
+    "alt": "000037 2"
+  },
+  {
+    "src": "/photos/uzb/000041 2.JPG",
+    "thumbSrc": "/photos/uzb/000041 2-thumb.jpg",
+    "alt": "000041 2"
+  },
+  {
     "src": "/photos/uzb/000043.jpg",
     "thumbSrc": "/photos/uzb/000043-thumb.jpg",
     "alt": "000043"
@@ -328,6 +408,11 @@
     "src": "/photos/uzb/column.JPG",
     "thumbSrc": "/photos/uzb/column-thumb.jpg",
     "alt": "column"
+  },
+  {
+    "src": "/photos/uzb/IMG_7279.jpg",
+    "thumbSrc": "/photos/uzb/IMG_7279-thumb.jpg",
+    "alt": "IMG_7279"
   },
   {
     "src": "/photos/uzb/khiva.JPG",

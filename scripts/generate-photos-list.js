@@ -31,6 +31,7 @@ async function generateThumbnail(imagePath) {
     }
 
     await sharp(imagePath)
+      .rotate() // Auto-rotate based on EXIF orientation
       .resize(THUMB_WIDTH, null, {
         withoutEnlargement: true,
         fit: 'inside'

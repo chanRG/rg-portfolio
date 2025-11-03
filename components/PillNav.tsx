@@ -13,9 +13,6 @@ export type PillNavItem = {
 };
 
 export interface PillNavProps {
-  logo: string;
-  logoAlt?: string;
-  logoHref?: string;
   items: PillNavItem[];
   activeHref?: string;
   className?: string;
@@ -28,9 +25,6 @@ export interface PillNavProps {
 }
 
 export function PillNav({
-  logo,
-  logoAlt = "Logo",
-  logoHref,
   items,
   activeHref,
   className = "",
@@ -44,10 +38,7 @@ export function PillNav({
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);
   const activeTweenRefs = useRef<Array<gsap.core.Tween | null>>([]);
-  const logoImgRef = useRef<HTMLImageElement | null>(null);
-  const logoTweenRef = useRef<gsap.core.Tween | null>(null);
   const navItemsRef = useRef<HTMLDivElement | null>(null);
-  const logoRef = useRef<HTMLAnchorElement | HTMLElement | null>(null);
 
   useEffect(() => {
     const layout = () => {
@@ -109,17 +100,7 @@ export function PillNav({
     }
 
     if (initialLoadAnimation) {
-      const logo = logoRef.current;
       const navItems = navItemsRef.current;
-
-      if (logo) {
-        gsap.set(logo, { scale: 0 });
-        gsap.to(logo, {
-          scale: 1,
-          duration: 0.6,
-          ease,
-        });
-      }
 
       if (navItems) {
         gsap.set(navItems, { width: 0, overflow: "hidden" });
@@ -156,19 +137,6 @@ export function PillNav({
     });
   };
 
-  const handleLogoEnter = () => {
-    const img = logoImgRef.current;
-    if (!img) return;
-    logoTweenRef.current?.kill();
-    gsap.set(img, { rotate: 0 });
-    logoTweenRef.current = gsap.to(img, {
-      rotate: 360,
-      duration: 0.2,
-      ease,
-      overwrite: "auto",
-    });
-  };
-
   const isExternalLink = (href: string) =>
     href.startsWith("http://") ||
     href.startsWith("https://") ||
@@ -186,39 +154,9 @@ export function PillNav({
     "--pill-text": pillTextColor ?? baseColor,
   } as CSSProperties;
 
-  const logoDestination = logoHref ?? items[0]?.href ?? "/";
-
-  const logoNode = isRouterLink(logoDestination) ? (
-    <Link
-      className="pill-logo"
-      href={logoDestination}
-      aria-label="Home"
-      onMouseEnter={handleLogoEnter}
-      ref={(el) => {
-        logoRef.current = el;
-      }}
-    >
-      <img src={logo} alt={logoAlt} ref={logoImgRef} />
-    </Link>
-  ) : (
-    <a
-      className="pill-logo"
-      href={logoDestination}
-      aria-label="Home"
-      onMouseEnter={handleLogoEnter}
-      ref={(el) => {
-        logoRef.current = el;
-      }}
-    >
-      <img src={logo} alt={logoAlt} ref={logoImgRef} />
-    </a>
-  );
-
   return (
     <div className="pill-nav-container">
       <nav className={`pill-nav ${className}`} aria-label="Primary" style={cssVars}>
-        {logoNode}
-
         <div className="pill-nav-items" ref={navItemsRef}>
           <ul className="pill-list" role="menubar">
             {items.map((item, i) => (
