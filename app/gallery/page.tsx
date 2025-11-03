@@ -42,8 +42,6 @@ export default function GalleryPage() {
         <div
           className="fixed inset-0 flex items-center justify-center overflow-hidden"
           style={{
-            top: "var(--nav-height, 80px)",
-            bottom: "var(--footer-height, 100px)",
             background: "transparent",
           }}
         >
@@ -64,8 +62,6 @@ export default function GalleryPage() {
       <div
         className="fixed inset-0 flex items-center justify-center overflow-hidden"
         style={{
-          top: "var(--nav-height, 80px)",
-          bottom: "var(--footer-height, 100px)",
           touchAction: "none",
           ["--viewer-pad" as any]: viewerPad,
           background: "transparent",
