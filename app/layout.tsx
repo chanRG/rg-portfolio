@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import { Navbar } from "./components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -8,7 +8,17 @@ import Footer from "./components/footer";
 import { ThemeProvider } from "./components/theme-switch";
 import { metaData } from "./lib/config";
 
-const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["500", "600", "700"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -52,7 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.className} dark`} suppressHydrationWarning>
+    <html lang="en" className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} dark`} suppressHydrationWarning>
       <head>
         <link
           rel="alternate"
@@ -83,7 +93,7 @@ export default function RootLayout({
         >
           <div className="flex min-h-screen w-full flex-col items-center">
             <Navbar />
-            <div className="flex w-full max-w-[624px] flex-1 flex-col px-6 sm:px-4 md:px-0">
+            <div className="flex w-full max-w-4xl flex-1 flex-col px-6 lg:px-0">
               <main
                 className="flex-1"
                 style={{ paddingTop: "calc(var(--nav-height, 0px) + 32px)" }}

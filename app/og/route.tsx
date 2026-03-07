@@ -7,10 +7,22 @@ export function GET(request: Request) {
 
   return new ImageResponse(
     (
-      <div tw="flex flex-col w-full h-full items-center justify-center bg-white">
-        <div tw="flex flex-col md:flex-row w-full py-12 px-4 md:items-center justify-between p-8">
-          <h2 tw="flex flex-col text-4xl font-bold text-left">{title}</h2>
-        </div>
+      <div
+        tw="flex flex-col w-full h-full items-start justify-end p-16"
+        style={{ backgroundColor: "#0a0a0a" }}
+      >
+        <h2
+          tw="text-5xl font-bold mb-4"
+          style={{ color: "#F5F5F0" }}
+        >
+          {title}
+        </h2>
+        <p
+          tw="text-xl"
+          style={{ color: "#A89068" }}
+        >
+          {metaData.name}
+        </p>
       </div>
     ),
     {

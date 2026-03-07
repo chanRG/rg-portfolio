@@ -5,6 +5,8 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
 import { TweetComponent } from "./tweet";
 import { CaptionComponent } from "./caption";
+import { BlogImage } from "./blog-image";
+import { BlogCaption } from "./blog-caption";
 import { YouTubeComponent } from "./youtube";
 import { ImageGrid } from "./image-grid";
 import rehypeKatex from "rehype-katex";
@@ -115,11 +117,11 @@ let components = {
   h4: createHeading(4),
   h5: createHeading(5),
   h6: createHeading(6),
-  Image: RoundedImage,
+  Image: BlogImage,
   ImageGrid,
   a: CustomLink,
   StaticTweet: TweetComponent,
-  Caption: CaptionComponent,
+  Caption: BlogCaption,
   YouTube: YouTubeComponent,
   code: Code,
   Table,

@@ -1,10 +1,10 @@
 export const metaData = {
-  baseUrl: "https://nextfolio-template.vercel.app/",
-  title: "RGS",
-  name: "Roger",
+  baseUrl: "https://profile.rogsbox.com",
+  title: "Roger Gonzalez Sedano",
+  name: "Roger Gonzalez Sedano",
   ogImage: "/opengraph-image.png",
   description:
-    "Software Engineer with experience in backend development, machine learning, and distributed systems.",
+    "Telecommunications Engineer specializing in EM Wave Propagation, Physical Modeling, and Wireless Systems.",
 };
 
 export const socialLinks = {

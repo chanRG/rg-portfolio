@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { CustomMDX } from "app/components/mdx";
 import { formatDate, getBlogPosts } from "app/lib/posts";
 import { metaData } from "app/lib/config";
+import { BlogImageProvider } from "app/components/blog-image";
+import { ImageLightbox } from "app/components/image-lightbox";
 
 export async function generateStaticParams() {
   let posts = getBlogPosts();
@@ -93,9 +95,12 @@ export default async function Blog({ params }) {
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>
-      <article className="prose prose-quoteless prose-neutral dark:prose-invert">
-        <CustomMDX source={post.content} />
-      </article>
+      <BlogImageProvider>
+        <article className="prose prose-quoteless prose-neutral dark:prose-invert blog-article max-w-none">
+          <CustomMDX source={post.content} />
+        </article>
+        <ImageLightbox />
+      </BlogImageProvider>
     </section>
   );
 }

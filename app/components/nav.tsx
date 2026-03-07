@@ -2,12 +2,10 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { metaData } from "../lib/config";
-import { PillNav, type PillNavItem } from "@/components/PillNav";
+import Link from "next/link";
 
-const navItems: PillNavItem[] = [
-  { href: "/", label: "About me" },
+const navItems = [
+  { href: "/", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
@@ -58,25 +56,37 @@ export function Navbar() {
   }, []);
 
   return (
-    <motion.nav
+    <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-50 bg-transparent"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-[var(--border-subtle)]"
       id="site-navbar"
-      style={{ transition: "all 0.3s ease" }}
+      style={{
+        backgroundColor: "rgba(10, 10, 10, 0.9)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+      }}
     >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
-        <div className="relative flex flex-col gap-3 py-4 md:flex-row md:items-center md:justify-center">
-          <PillNav
-            items={navItems}
-            activeHref={activeHref}
-            className="w-full md:w-auto"
-            baseColor="var(--pill-base)"
-            pillColor="var(--pill-fill)"
-            hoveredPillTextColor="var(--pill-hover-text)"
-            pillTextColor="var(--pill-text)"
-          />
+      <div className="max-w-4xl mx-auto px-6 sm:px-4">
+        <div className="flex items-center justify-center gap-8 py-4">
+          {navItems.map((item) => {
+            const isActive = activeHref === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`relative text-xs tracking-[0.2em] uppercase transition-colors duration-200 cursor-pointer pb-1 ${
+                  isActive
+                    ? "text-[var(--accent)] border-b-2 border-[var(--accent)]"
+                    : "text-[var(--text-secondary)] hover:text-[var(--text-primary)] border-b-2 border-transparent"
+                }`}
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
-    </motion.nav>
+    </nav>
   );
 }

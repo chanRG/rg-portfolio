@@ -20,7 +20,7 @@ export const projects: Project[] = [
     title: "Research Intern",
     year: "Aug 2024 - May 2025",
     description:
-      "MSc degree project candidate and Erasmus exchange student in the Communication Systems Department, working on mathematical models of near-field 6G communications, with a focus on redefining the boundary conditions between the near field and far field.",
+      "Developed novel mathematical models for electromagnetic wave propagation in 6G near-field scenarios. Redefined boundary conditions and validated theoretical limits using numerical analysis. Implemented extensive MATLAB simulations bridging physical channel models and estimation algorithms.",
     url: "https://www.kth.se/cs/cos/division-of-communication-systems-1.834507",
     thesisUrl: "https://urn.kb.se/resolve?urn=urn:nbn:se:kth:diva-364289",
     tags: ["6G", "Wireless Communications", "Research", "Mathematical Modeling"],
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     title: "Research Intern",
     year: "Sep 2023 - Jun 2024",
     description:
-      "Antenna design and channel characterization for Wireless Network-on-Chip using full-wave simulators.",
+      "Simulated EM wave interaction within complex 3D structures for sub-THz Wireless Network-on-Chip. Performed computational EM simulations (CST Studio Suite) to optimize radiation efficiency and coupling. Investigated Time Reversal techniques for multipath propagation analysis.",
     url: "https://n3cat.upc.edu",
     workUrl: "https://cloud.rogsbox.com/index.php/s/S52Pjar5azx9LyQ",
     tags: ["Antenna Design", "Wireless Networks", "Electromagnetics", "Simulation"],
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     title: "Hardware Engineer Intern",
     year: "Apr 2022 - Jul 2022",
     description:
-      "Automotive hardware design, analysis, and testing for embedded systems and components.",
+      "Conducted laboratory validation of automotive ECUs using VNAs and Oscilloscopes. Performed signal integrity measurements and documented compliance with technical standards.",
     url: "https://www.idneo.com",
     tags: ["Hardware Design", "Automotive", "Testing", "Electronics"],
     type: "work",
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     title: "Technical Apprentice",
     year: "Jul 2021 - Sep 2021",
     description:
-      "Developed computer vision software for textile defect detection.",
+      "Developed computer vision software for automated defect detection. Authored technical manuals streamlining maintenance procedures.",
     url: "https://www.engi-on.com",
     tags: ["Computer Vision", "Python", "Image Processing", "Automation"],
     type: "work",
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     title: "MSc in Advanced Telecommunications Technologies",
     year: "Sep 2023 - Jun 2025",
     description:
-      "Master’s focused on wireless communications and AI for multimedia processing.",
+      "Focus on Wireless Communications, Computational EM, and AI for Signal Processing. Coursework: Optical Remote Sensing (LIDAR), Advanced Communications, Machine Learning, Computer Vision with Deep Learning, 5G Mobile Communications. Designed ML classifiers for Dynamic Spectrum Access.",
     url: "https://matt.masters.upc.edu",
     tags: ["Wireless Communications", "AI", "Multimedia Processing"],
     type: "education",
@@ -122,7 +122,7 @@ export const projects: Project[] = [
     title: "BSc in Telecommunications Technologies and Services Engineering",
     year: "Sep 2018 - Jan 2023",
     description:
-      "Major in telecommunications systems, with a focus on signal processing, electromagnetism, and radiocommunications. Thesis: Planar antenna design and channel modeling for chip-scale communications.",
+      "Major in telecommunications systems with focus on signal processing, electromagnetism, and radiocommunications. Coursework: Microwaves (Honors), Space Telecommunications, Radiation & Propagation, Antennas, Optical Communications. Thesis: Planar antenna design and channel modeling for chip-scale communications.",
     url: "https://telecos.upc.edu/en/study-programs/degrees/bachelors-degree-in-telecommunications-technologies-and-services-engineering?set_language=en",
     tags: ["Signal Processing", "Electromagnetics", "Radiocommunications", "Antenna Design"],
     type: "education",

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Portfolio & Experience",
-  description: "A selection of work experience, personal projects and education by Ivan Romero.",
+  title: "Experience & Projects",
+  description: "Work experience, personal projects, and education by Roger Gonzalez Sedano.",
 };
 
 export default function ProjectsLayout({
