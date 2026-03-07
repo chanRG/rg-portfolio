@@ -5,9 +5,9 @@ const sharp = require('sharp');
 const photosDir = path.join(__dirname, '..', 'public', 'photos');
 const outputJsonPath = path.join(__dirname, '..', 'app', 'gallery', 'photos-list.json');
 const MAX_WIDTH = 2400; // Max width for high quality display
-const THUMB_WIDTH = 400; // Thumbnail width for gallery dome
+const THUMB_WIDTH = 300; // Thumbnail width for gallery dome
 const QUALITY = 85; // JPEG quality
-const THUMB_QUALITY = 80; // Thumbnail quality
+const THUMB_QUALITY = 70; // Thumbnail quality
 
 async function generateThumbnail(imagePath) {
   try {

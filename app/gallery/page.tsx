@@ -75,6 +75,8 @@ export default function GalleryPage() {
           fit={fit}
           minRadius={minRadius}
           padFactor={isMobile ? 0.2 : 0.25}
+          imageBorderRadius="0px"
+          openedImageBorderRadius="0px"
         />
       </div>
     </>

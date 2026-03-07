@@ -161,8 +161,8 @@ export default function DomeGallery({
   dragDampening = 2,
   openedImageWidth = "400px",
   openedImageHeight = "400px",
-  imageBorderRadius = "30px",
-  openedImageBorderRadius = "30px",
+  imageBorderRadius = "0px",
+  openedImageBorderRadius = "0px",
   grayscale = true,
 }: DomeGalleryProps) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -172,6 +172,8 @@ export default function DomeGallery({
   const viewerRef = useRef<HTMLDivElement>(null);
   const scrimRef = useRef<HTMLDivElement>(null);
   const focusedElRef = useRef<HTMLElement | null>(null);
+  const lightboxUIRef = useRef<HTMLElement | null>(null);
+  const currentFocusedIndexRef = useRef<number>(-1);
   const originalTilePositionRef = useRef<{
     left: number;
     top: number;
@@ -406,6 +408,102 @@ export default function DomeGallery({
     { target: mainRef, eventOptions: { passive: true } }
   );
 
+  const navigateImage = useCallback((direction: "prev" | "next") => {
+    const currentIdx = currentFocusedIndexRef.current;
+    if (currentIdx < 0) return;
+
+    // Build unique image list (items repeat cyclically)
+    const uniqueSrcs = new Set<string>();
+    const uniqueIndices: number[] = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].src && !uniqueSrcs.has(items[i].src)) {
+        uniqueSrcs.add(items[i].src);
+        uniqueIndices.push(i);
+      }
+    }
+
+    const currentUniqueIdx = uniqueIndices.indexOf(currentIdx);
+    if (currentUniqueIdx < 0) return;
+
+    const nextUniqueIdx = direction === "next"
+      ? (currentUniqueIdx + 1) % uniqueIndices.length
+      : (currentUniqueIdx - 1 + uniqueIndices.length) % uniqueIndices.length;
+    const nextItemIdx = uniqueIndices[nextUniqueIdx];
+
+    const overlay = viewerRef.current?.querySelector(".enlarge") as HTMLElement | null;
+    if (!overlay) return;
+    const img = overlay.querySelector("img") as HTMLImageElement | null;
+    if (!img) return;
+
+    // Crossfade: fade out, swap src, fade in
+    img.style.transition = "opacity 0.25s ease";
+    img.style.opacity = "0";
+
+    setTimeout(() => {
+      img.src = items[nextItemIdx].src;
+      currentFocusedIndexRef.current = nextItemIdx;
+
+      // After navigation, close should fade out instead of FLIP back to wrong tile
+      originalTilePositionRef.current = null;
+
+      // Update counter
+      const counterEl = viewerRef.current?.querySelector(".lightbox-counter") as HTMLElement;
+      if (counterEl) {
+        const imgIdx = images.findIndex(image => {
+          const src = typeof image === "string" ? image : image.src;
+          return src === items[nextItemIdx].src;
+        });
+        const displayIdx = imgIdx >= 0 ? imgIdx + 1 : 1;
+        counterEl.textContent = `${String(displayIdx).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}`;
+      }
+
+      const resizeAndFadeIn = () => {
+        // Resize overlay to match new image aspect ratio
+        const frameR = frameRef.current?.getBoundingClientRect();
+        const mainR = mainRef.current?.getBoundingClientRect();
+        if (frameR && mainR && img.naturalWidth && img.naturalHeight) {
+          const natW = img.naturalWidth;
+          const natH = img.naturalHeight;
+          const isVertical = natH > natW;
+          const maxW = frameR.width;
+          const maxH = frameR.height;
+          const isMobile = window.innerWidth <= 768;
+
+          let scale: number;
+          if (isMobile) {
+            if (isVertical) {
+              scale = Math.min(maxW * 1.3 / natW, maxH * 2.8 / natH);
+            } else {
+              scale = Math.min(maxW * 1.4 / natW, maxH * 1.1 / natH);
+            }
+          } else {
+            if (isVertical) {
+              scale = Math.min(maxW * 1.2 / natW, maxH * 1.4 / natH);
+            } else {
+              scale = Math.min(maxW * 1.2 / natW, maxH * 1.2 / natH);
+            }
+          }
+
+          const finalW = Math.round(natW * scale);
+          const finalH = Math.round(natH * scale);
+          const finalLeft = frameR.left - mainR.left + (frameR.width - finalW) / 2;
+          const finalTop = frameR.top - mainR.top + (frameR.height - finalH) / 2;
+
+          overlay.style.transition = "left 0.35s ease, top 0.35s ease, width 0.35s ease, height 0.35s ease";
+          overlay.style.left = `${finalLeft}px`;
+          overlay.style.top = `${finalTop}px`;
+          overlay.style.width = `${finalW}px`;
+          overlay.style.height = `${finalH}px`;
+        }
+
+        img.style.opacity = "1";
+      };
+
+      img.onload = resizeAndFadeIn;
+      if (img.complete && img.naturalWidth) resizeAndFadeIn();
+    }, 250);
+  }, [items, images]);
+
   const openItemFromElement = (el: HTMLElement) => {
     if (openingRef.current) return;
     openingRef.current = true;
@@ -478,6 +576,49 @@ export default function DomeGallery({
     img.loading = "eager";
     overlay.appendChild(img);
     viewerRef.current!.appendChild(overlay);
+
+    // Track current image index for navigation
+    const itemIndex = items.findIndex(item => item.src === rawSrc);
+    currentFocusedIndexRef.current = itemIndex;
+
+    // Create lightbox UI elements
+    const lightboxUI = document.createElement("div");
+    lightboxUI.className = "lightbox-ui";
+
+    const escBtn = document.createElement("button");
+    escBtn.className = "lightbox-esc";
+    escBtn.textContent = "ESC";
+    escBtn.addEventListener("click", () => scrimRef.current?.click());
+    lightboxUI.appendChild(escBtn);
+
+    const prevBtn = document.createElement("button");
+    prevBtn.className = "lightbox-nav lightbox-nav--prev";
+    prevBtn.textContent = "\u2190";
+    prevBtn.addEventListener("click", (e) => { e.stopPropagation(); navigateImage("prev"); });
+    lightboxUI.appendChild(prevBtn);
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "lightbox-nav lightbox-nav--next";
+    nextBtn.textContent = "\u2192";
+    nextBtn.addEventListener("click", (e) => { e.stopPropagation(); navigateImage("next"); });
+    lightboxUI.appendChild(nextBtn);
+
+    const accentLine = document.createElement("div");
+    accentLine.className = "lightbox-accent-line";
+    lightboxUI.appendChild(accentLine);
+
+    const imageIndex = images.findIndex(image => {
+      const src = typeof image === "string" ? image : image.src;
+      return src === rawSrc;
+    });
+    const displayIdx = imageIndex >= 0 ? imageIndex + 1 : 1;
+    const counter = document.createElement("div");
+    counter.className = "lightbox-counter";
+    counter.textContent = `${String(displayIdx).padStart(2, "0")} / ${String(images.length).padStart(2, "0")}`;
+    lightboxUI.appendChild(counter);
+
+    viewerRef.current!.appendChild(lightboxUI);
+    lightboxUIRef.current = lightboxUI;
 
     // Calculate final size immediately
     const calculateFinalSize = () => {
@@ -605,6 +746,11 @@ export default function DomeGallery({
       const overlay = viewerRef.current?.querySelector(".enlarge") as HTMLElement | null;
       if (!overlay) return;
 
+      // Clean up lightbox UI
+      lightboxUIRef.current?.remove();
+      lightboxUIRef.current = null;
+      currentFocusedIndexRef.current = -1;
+
       const refDiv = parent.querySelector(".item__image--reference") as HTMLElement | null;
 
       const originalPos = originalTilePositionRef.current;
@@ -648,9 +794,8 @@ export default function DomeGallery({
         width: ${overlayRelativeToRoot.width}px;
         height: ${overlayRelativeToRoot.height}px;
         z-index: 9999;
-        border-radius: var(--enlarge-radius, 32px);
+        border-radius: var(--enlarge-radius, 0px);
         overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,.35);
         transition: all ${enlargeTransitionMs}ms cubic-bezier(0.4, 0, 0.2, 1);
         pointer-events: none;
         margin: 0;
@@ -722,6 +867,8 @@ export default function DomeGallery({
     scrim.addEventListener("click", close);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") navigateImage("prev");
+      if (e.key === "ArrowRight") navigateImage("next");
     };
     window.addEventListener("keydown", onKey);
 
@@ -729,7 +876,7 @@ export default function DomeGallery({
       scrim.removeEventListener("click", close);
       window.removeEventListener("keydown", onKey);
     };
-  }, [enlargeTransitionMs, unlockScroll]);
+  }, [enlargeTransitionMs, unlockScroll, navigateImage]);
 
   useEffect(() => {
     return () => {
@@ -782,6 +929,9 @@ export default function DomeGallery({
                   onPointerUp={onTilePointerUp}
                 >
                   <img src={it.thumbSrc} draggable={false} alt={it.alt} loading="lazy" />
+                  <span className="tile-counter">
+                    {String((i % images.length) + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+                  </span>
                 </div>
               </div>
             ))}
