@@ -166,7 +166,14 @@ export default function Page() {
 
                   {project.company && (
                     <p className="text-sm font-mono text-[var(--accent)] mb-2">
-                      {project.company}
+                      <Link
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline underline-offset-2"
+                      >
+                        {project.company}
+                      </Link>
                       {project.location && (
                         <span className="text-[var(--text-tertiary)] ml-2">— {project.location}</span>
                       )}
@@ -190,36 +197,30 @@ export default function Page() {
                     </div>
                   )}
 
-                  <div className="flex items-center gap-6 md:gap-4">
-                    <Link
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
-                    >
-                      Visit Company <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-                    </Link>
-                    {"workUrl" in project && project.workUrl && (
-                      <Link
-                        href={project.workUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
-                      >
-                        View Work →
-                      </Link>
-                    )}
-                    {"thesisUrl" in project && project.thesisUrl && (
-                      <Link
-                        href={project.thesisUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
-                      >
-                        View Thesis →
-                      </Link>
-                    )}
-                  </div>
+                  {(("workUrl" in project && project.workUrl) || ("thesisUrl" in project && project.thesisUrl)) && (
+                    <div className="flex items-center gap-6 md:gap-4">
+                      {"workUrl" in project && project.workUrl && (
+                        <Link
+                          href={project.workUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                        >
+                          View Work →
+                        </Link>
+                      )}
+                      {"thesisUrl" in project && project.thesisUrl && (
+                        <Link
+                          href={project.thesisUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                        >
+                          View Thesis →
+                        </Link>
+                      )}
+                    </div>
+                  )}
                 </article>
               </InView>
             ))}
@@ -358,7 +359,14 @@ export default function Page() {
 
                   {project.university && (
                     <p className="text-sm font-mono text-[var(--accent)] mb-2">
-                      {project.university}
+                      <Link
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline underline-offset-2"
+                      >
+                        {project.university}
+                      </Link>
                       {project.location && (
                         <span className="text-[var(--text-tertiary)] ml-2">— {project.location}</span>
                       )}
@@ -381,17 +389,6 @@ export default function Page() {
                       ))}
                     </div>
                   )}
-
-                  <div className="flex items-center gap-6 md:gap-4">
-                    <Link
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
-                    >
-                      Visit University <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-                    </Link>
-                  </div>
                 </article>
               </InView>
             ))}
