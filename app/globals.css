@@ -224,6 +224,13 @@ table {
   animation: grow-width 0.8s ease-out forwards;
 }
 
+@media (max-width: 767px) {
+  @keyframes grow-width {
+    from { width: 0; }
+    to { width: 3rem; }
+  }
+}
+
 /* ─── Blog Image Showcase ─── */
 
 /* Prevent full-bleed horizontal scrollbar — clip on body, not article */

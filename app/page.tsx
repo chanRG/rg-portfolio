@@ -25,17 +25,17 @@ export default function Page() {
       <SideProgressBar />
       <section className="max-w-4xl mx-auto">
         {/* Hero Section */}
-        <div id="hero" className="mb-24 md:mb-32">
+        <div id="hero" className="mb-16 md:mb-32">
           <div className="flex flex-col md:flex-row items-start gap-10 md:gap-16">
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0 w-full flex justify-center md:w-auto md:block">
               <a href={socialLinks.github} target="_blank" rel="noopener noreferrer">
                 <Image
                   src="/perfil.jpg"
                   alt="Roger Gonzalez Sedano"
-                  className="grayscale hover:grayscale-0 transition-all duration-700 border border-[var(--border-subtle)]"
+                  className="w-[220px] h-[220px] md:w-[180px] md:h-[180px] grayscale hover:grayscale-0 transition-all duration-700 border border-[var(--border-subtle)]"
                   unoptimized
-                  width={180}
-                  height={180}
+                  width={220}
+                  height={220}
                   priority
                 />
               </a>
@@ -43,14 +43,14 @@ export default function Page() {
 
             <div className="flex-1">
               <h1
-                className="text-5xl md:text-7xl font-bold tracking-tight text-[var(--text-primary)] leading-[0.95] mb-6"
+                className="text-4xl md:text-7xl font-bold tracking-tight text-[var(--text-primary)] leading-[0.95] mb-4 md:mb-6 text-center md:text-left"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Roger<br />
                 Gonzalez<br />
                 <span className="text-[var(--accent)]">Sedano</span>
               </h1>
-              <div className="mb-8">
+              <div className="mb-6 md:mb-8 text-center md:text-left">
                 <TextScramble
                   className="font-mono text-base md:text-lg text-[var(--text-secondary)] tracking-wide"
                   duration={2}
@@ -59,10 +59,10 @@ export default function Page() {
                 </TextScramble>
               </div>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-4">
                 <button
                   onClick={() => scrollToSection('work-experience')}
-                  className="px-6 py-3 border border-[var(--accent)] text-[var(--accent)] text-sm font-medium uppercase tracking-widest hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] transition-all duration-300 cursor-pointer"
+                  className="w-full md:w-auto text-center px-6 py-3.5 md:py-3 border border-[var(--accent)] text-[var(--accent)] text-sm font-medium uppercase tracking-widest hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] transition-all duration-300 cursor-pointer"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   View Experience
@@ -70,7 +70,7 @@ export default function Page() {
                 <a
                   href="/cv_RogerGonzalezSedano.pdf"
                   download
-                  className="px-6 py-3 bg-[var(--accent)] text-[var(--bg-primary)] text-sm font-medium uppercase tracking-widest hover:bg-[var(--accent-hover)] transition-all duration-300"
+                  className="w-full md:w-auto text-center px-6 py-3.5 md:py-3 bg-[var(--accent)] text-[var(--bg-primary)] text-sm font-medium uppercase tracking-widest hover:bg-[var(--accent-hover)] transition-all duration-300"
                   style={{ fontFamily: "var(--font-heading)" }}
                 >
                   Download CV
@@ -81,7 +81,7 @@ export default function Page() {
         </div>
 
         {/* About Section */}
-        <div className="mb-24 md:mb-32">
+        <div className="mb-20 md:mb-32">
           <InView
             variants={{
               hidden: { opacity: 0, y: 30 },
@@ -91,12 +91,12 @@ export default function Page() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <h2
-              className="text-4xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
+              className="text-3xl md:text-6xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               About
             </h2>
-            <div className="accent-line mb-10"></div>
+            <div className="accent-line mb-8 md:mb-10"></div>
           </InView>
 
           <InView
@@ -107,7 +107,7 @@ export default function Page() {
             viewOptions={{ amount: 0.2 }}
             transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
           >
-            <div className="space-y-6 text-base md:text-lg leading-relaxed text-[var(--text-secondary)] font-mono">
+            <div className="border-l-2 border-[var(--accent)] pl-5 md:border-l-0 md:pl-0 space-y-8 md:space-y-6 text-[15px] md:text-lg leading-[1.75] md:leading-relaxed text-[var(--text-secondary)] font-mono">
               <p>
                 Telecommunications Engineer specializing in Electromagnetic Wave Propagation and Physical Modeling, with expertise in RF physics from research at KTH and N3Cat, and a strong foundation in Machine Learning.
               </p>
@@ -122,7 +122,7 @@ export default function Page() {
         </div>
 
         {/* Work Experience Section */}
-        <div id="work-experience" className="mb-24 md:mb-32">
+        <div id="work-experience" className="mb-14 md:mb-32">
           <InView
             variants={{
               hidden: { opacity: 0, x: -30 },
@@ -132,12 +132,12 @@ export default function Page() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <h3
-              className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
+              className="text-2xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Experience
             </h3>
-            <div className="accent-line mb-10"></div>
+            <div className="accent-line mb-8 md:mb-10"></div>
           </InView>
 
           <div>
@@ -151,7 +151,7 @@ export default function Page() {
                 viewOptions={{ amount: 0.2 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
-                <article className="group border-b border-[var(--border-subtle)] py-8 first:pt-0 last:border-b-0 hover:border-[var(--accent)] transition-colors duration-300">
+                <article className="group border-b border-[var(--border-subtle)] py-6 md:py-8 first:pt-0 last:border-b-0 hover:border-[var(--accent)] transition-colors duration-300">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                     <h4
                       className="text-xl md:text-2xl font-semibold text-[var(--text-primary)]"
@@ -178,11 +178,11 @@ export default function Page() {
                   </p>
 
                   {project.tags && (
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2.5 md:gap-2 mb-4">
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border-subtle)] px-2 py-1"
+                          className="text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border-subtle)] px-2.5 py-1.5 md:px-2 md:py-1"
                         >
                           {tag}
                         </span>
@@ -190,12 +190,12 @@ export default function Page() {
                     </div>
                   )}
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-6 md:gap-4">
                     <Link
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                      className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
                     >
                       Visit Company <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
                     </Link>
@@ -204,7 +204,7 @@ export default function Page() {
                         href={project.workUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                        className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
                       >
                         View Work →
                       </Link>
@@ -214,7 +214,7 @@ export default function Page() {
                         href={project.thesisUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                        className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
                       >
                         View Thesis →
                       </Link>
@@ -227,7 +227,7 @@ export default function Page() {
         </div>
 
         {/* Personal Projects Section */}
-        <div id="personal-projects" className="mb-24 md:mb-32">
+        <div id="personal-projects" className="mb-14 md:mb-32">
           <InView
             variants={{
               hidden: { opacity: 0, x: -30 },
@@ -237,12 +237,12 @@ export default function Page() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <h3
-              className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
+              className="text-2xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Projects
             </h3>
-            <div className="accent-line mb-10"></div>
+            <div className="accent-line mb-8 md:mb-10"></div>
           </InView>
 
           <div>
@@ -256,7 +256,7 @@ export default function Page() {
                 viewOptions={{ amount: 0.2 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
-                <article className="group border-b border-[var(--border-subtle)] py-8 first:pt-0 last:border-b-0 hover:border-[var(--accent)] transition-colors duration-300">
+                <article className="group border-b border-[var(--border-subtle)] py-6 md:py-8 first:pt-0 last:border-b-0 hover:border-[var(--accent)] transition-colors duration-300">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                     <h4
                       className="text-xl md:text-2xl font-semibold text-[var(--text-primary)]"
@@ -283,11 +283,11 @@ export default function Page() {
                   </p>
 
                   {project.tags && (
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2.5 md:gap-2 mb-4">
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border-subtle)] px-2 py-1"
+                          className="text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border-subtle)] px-2.5 py-1.5 md:px-2 md:py-1"
                         >
                           {tag}
                         </span>
@@ -296,12 +296,12 @@ export default function Page() {
                   )}
 
                   {project.url && (
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-6 md:gap-4">
                       <Link
                         href={project.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                        className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
                       >
                         View Project <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
                       </Link>
@@ -314,7 +314,7 @@ export default function Page() {
         </div>
 
         {/* Education Section */}
-        <div id="education" className="mb-24 md:mb-32">
+        <div id="education" className="mb-14 md:mb-32">
           <InView
             variants={{
               hidden: { opacity: 0, x: -30 },
@@ -324,12 +324,12 @@ export default function Page() {
             transition={{ duration: 0.5, ease: 'easeOut' }}
           >
             <h3
-              className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
+              className="text-2xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 tracking-tight"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Education
             </h3>
-            <div className="accent-line mb-10"></div>
+            <div className="accent-line mb-8 md:mb-10"></div>
           </InView>
 
           <div>
@@ -343,7 +343,7 @@ export default function Page() {
                 viewOptions={{ amount: 0.2 }}
                 transition={{ duration: 0.5, ease: 'easeOut', delay: index * 0.08 }}
               >
-                <article className="group border-b border-[var(--border-subtle)] py-8 first:pt-0 last:border-b-0 hover:border-[var(--accent)] transition-colors duration-300">
+                <article className="group border-b border-[var(--border-subtle)] py-6 md:py-8 first:pt-0 last:border-b-0 hover:border-[var(--accent)] transition-colors duration-300">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                     <h4
                       className="text-xl md:text-2xl font-semibold text-[var(--text-primary)]"
@@ -370,11 +370,11 @@ export default function Page() {
                   </p>
 
                   {project.tags && (
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="flex flex-wrap gap-2.5 md:gap-2 mb-4">
                       {project.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border-subtle)] px-2 py-1"
+                          className="text-xs font-mono text-[var(--text-tertiary)] border border-[var(--border-subtle)] px-2.5 py-1.5 md:px-2 md:py-1"
                         >
                           {tag}
                         </span>
@@ -382,12 +382,12 @@ export default function Page() {
                     </div>
                   )}
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-6 md:gap-4">
                     <Link
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
+                      className="text-sm py-1 md:py-0 text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors duration-200 cursor-pointer"
                     >
                       Visit University <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
                     </Link>
@@ -399,24 +399,24 @@ export default function Page() {
         </div>
 
         {/* Contact CTA */}
-        <div id="contact" className="mt-24 mb-8 py-16 border-t border-[var(--border-subtle)]">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div id="contact" className="mt-16 md:mt-24 mb-8 py-12 md:py-16 border-t-2 border-[var(--accent)] md:border-t md:border-[var(--border-subtle)]">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8">
             <div>
               <h2
-                className="text-4xl md:text-5xl font-bold text-[var(--text-primary)] mb-3 tracking-tight"
+                className="text-3xl md:text-5xl font-bold text-[var(--text-primary)] mb-2 md:mb-3 tracking-tight"
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Let&apos;s work<br />
                 <span className="text-[var(--accent)]">together</span>
               </h2>
-              <p className="text-base text-[var(--text-secondary)] font-mono max-w-md">
+              <p className="text-[15px] md:text-base text-[var(--text-secondary)] font-mono max-w-md">
                 Open to research collaborations, engineering roles, and interesting projects.
               </p>
             </div>
 
             <Link
               href="/contact"
-              className="group px-8 py-4 border border-[var(--accent)] text-[var(--accent)] text-sm font-medium uppercase tracking-widest hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] transition-all duration-300 cursor-pointer"
+              className="group w-full md:w-auto text-center px-8 py-4 bg-[var(--accent)] text-[var(--bg-primary)] md:bg-transparent md:text-[var(--accent)] border border-[var(--accent)] text-sm font-medium uppercase tracking-widest hover:bg-[var(--accent)] hover:text-[var(--bg-primary)] transition-all duration-300 cursor-pointer"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Get in touch
